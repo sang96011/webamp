@@ -180,6 +180,7 @@ const playlist = (state = defaultPlaylistState, action) => {
             mediaTagsRequestStatus: MEDIA_TAG_REQUEST_STATUS.COMPLETE,
             title: action.title,
             artist: action.artist,
+            album: action.album,
             albumArtUrl: action.albumArtUrl
           }
         }

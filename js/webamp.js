@@ -218,12 +218,8 @@ class Winamp {
       if (track == null) {
         return;
       }
-      cb({
-        url: track.url,
-        title: track.title,
-        artist: track.artist
-        // album: track.album
-      });
+      const { url, title, artist, album } = track;
+      cb({ url, metaData: { title, artist, album } });
     });
   }
 

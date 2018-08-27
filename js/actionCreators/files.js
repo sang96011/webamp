@@ -223,8 +223,8 @@ export function loadMediaFile(track, priority = null, atIndex = 0) {
     }
 
     if (metaData != null) {
-      const { artist, title } = metaData;
-      dispatch({ type: SET_MEDIA_TAGS, artist, title, id });
+      const { artist, title, album } = metaData;
+      dispatch({ type: SET_MEDIA_TAGS, artist, title, album, id });
     } else if (blob != null) {
       // Blobs can be loaded quickly
       dispatch(fetchMediaTags(blob, id));
@@ -256,14 +256,14 @@ export function fetchMediaTags(file, id) {
       const data = await genMediaTags(file);
       // There's more data here, but we don't have a use for it yet:
       // https://github.com/aadsm/jsmediatags#shortcuts
-      const { artist, title, picture } = data.tags;
+      const { artist, title, album, picture } = data.tags;
       let albumArtUrl = null;
       if (picture) {
         const byteArray = new Uint8Array(picture.data);
         const blob = new Blob([byteArray], { type: picture.type });
         albumArtUrl = URL.createObjectURL(blob);
       }
-      dispatch({ type: SET_MEDIA_TAGS, artist, title, albumArtUrl, id });
+      dispatch({ type: SET_MEDIA_TAGS, artist, title, album, albumArtUrl, id });
     } catch (e) {
       dispatch({ type: MEDIA_TAG_REQUEST_FAILED, id });
     }
