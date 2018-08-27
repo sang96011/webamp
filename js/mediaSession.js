@@ -1,17 +1,20 @@
 export default function enableMediaSession(webamp) {
   if ("mediaSession" in navigator) {
-    webamp.onTrackDidChange(({ title, artist, album }) => {
+    webamp.onTrackDidChange(({ title, artist, album, albumArtUrl }) => {
       navigator.mediaSession.metadata = new MediaMetadata({
         title,
         artist,
         album,
-        artwork: [
-          {
-            src: "https://dummyimage.com/96x96",
-            sizes: "96x96",
-            type: "image/png"
-          }
-        ]
+        artwork: albumArtUrl
+          ? [
+              {
+                src: albumArtUrl
+                // We don't currently know these.
+                // sizes: "96x96",
+                // type: "image/png"
+              }
+            ]
+          : []
       });
     });
 
