@@ -13,6 +13,7 @@ import zaxon from "../skins/ZaxonRemake1-0.wsz";
 import green from "../skins/Green-Dimension-V2.wsz";
 import MilkdropWindow from "./components/MilkdropWindow";
 import screenshotInitialState from "./screenshotInitialState";
+import enableMediaSession from "./mediaSession";
 import Webamp from "./webamp";
 import {
   STEP_MARQUEE,
@@ -228,6 +229,8 @@ Raven.context(() => {
       }
     });
   }
+
+  enableMediaSession(webamp);
 
   webamp.renderWhenReady(document.getElementById("app"));
 

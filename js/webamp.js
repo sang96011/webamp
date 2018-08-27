@@ -8,10 +8,16 @@ import Hotkeys from "./hotkeys";
 import Media from "./media";
 import { getTrackCount, getTracks } from "./selectors";
 import {
+  play,
   setSkinFromUrl,
   loadMediaFiles,
   setWindowSize,
-  loadFilesFromReferences
+  loadFilesFromReferences,
+  pause,
+  seekBackward,
+  seekForward,
+  next,
+  previous
 } from "./actionCreators";
 import { LOAD_STYLE } from "./constants";
 import { uniqueId, objectMap, objectForEach } from "./utils";
@@ -164,6 +170,30 @@ class Winamp {
     if (enableHotkeys) {
       new Hotkeys(this.store.dispatch);
     }
+  }
+
+  play() {
+    this.store.dispatch(play());
+  }
+
+  pause() {
+    this.store.dispatch(pause());
+  }
+
+  seekBackward() {
+    this.store.dispatch(seekBackward());
+  }
+
+  seekForward() {
+    this.store.dispatch(seekForward());
+  }
+
+  nextTrack() {
+    this.store.dispatch(next());
+  }
+
+  previousTrack() {
+    this.store.dispatch(previous());
   }
 
   // Append this array of tracks to the end of the current playlist.
