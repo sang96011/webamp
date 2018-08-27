@@ -218,7 +218,12 @@ class Winamp {
       if (track == null) {
         return;
       }
-      cb({ url: track.url });
+      cb({
+        url: track.url,
+        title: track.title,
+        artist: track.artist
+        // album: track.album
+      });
     });
   }
 
