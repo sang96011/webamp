@@ -22,10 +22,10 @@ export default function enableMediaSession(webamp) {
       webamp.pause();
     });
     navigator.mediaSession.setActionHandler("seekbackward", () => {
-      webamp.seekBackward();
+      webamp.seekBackward(10);
     });
     navigator.mediaSession.setActionHandler("seekforward", () => {
-      webamp.seekForward();
+      webamp.seekForward(10);
     });
     navigator.mediaSession.setActionHandler("previoustrack", () => {
       webamp.previousTrack();
