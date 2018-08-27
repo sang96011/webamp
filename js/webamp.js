@@ -180,12 +180,12 @@ class Winamp {
     this.store.dispatch(pause());
   }
 
-  seekBackward() {
-    this.store.dispatch(seekBackward());
+  seekBackward(seconds) {
+    this.store.dispatch(seekBackward(seconds));
   }
 
-  seekForward() {
-    this.store.dispatch(seekForward());
+  seekForward(seconds) {
+    this.store.dispatch(seekForward(seconds));
   }
 
   nextTrack() {
