@@ -6,7 +6,7 @@ import getStore from "./store";
 import App from "./components/App";
 import Hotkeys from "./hotkeys";
 import Media from "./media";
-import { getTrackCount, getTracks } from "./selectors";
+import { getTrackCount, getTracks, getSerlializedState } from "./selectors";
 import {
   setSkinFromUrl,
   loadMediaFiles,
@@ -27,7 +27,8 @@ import {
   LOADED,
   REGISTER_VISUALIZER,
   SET_Z_INDEX,
-  SET_MEDIA
+  SET_MEDIA,
+  LOAD_SERIALIZED_STATE
 } from "./actionTypes";
 import Emitter from "./emitter";
 
@@ -204,6 +205,18 @@ class Winamp {
   async skinIsLoaded() {
     // Wait for the skin to load.
     return storeHas(this.store, state => !state.display.loading);
+  }
+
+  loadSerializedState(serializedState) {
+    this.store.dispatch({ type: LOAD_SERIALIZED_STATE, serializedState });
+  }
+
+  getSerializedState() {
+    return getSerlializedState(this.store.getState());
+  }
+
+  onStateChange(cb) {
+    return this.store.subscribe(cb);
   }
 
   async renderWhenReady(node) {
