@@ -80,11 +80,13 @@ const NOISY_ACTION_TYPES = new Set([
 const MIN_MILKDROP_WIDTH = 725;
 
 let screenshot = false;
+let clearState = false;
 let skinUrl = configSkinUrl;
 if ("URLSearchParams" in window) {
   const params = new URLSearchParams(location.search);
   screenshot = params.get("screenshot");
   skinUrl = params.get("skinUrl") || skinUrl;
+  clearState = Boolean(params.get("clearState"));
 }
 
 function supressDragAndDrop(e) {
@@ -267,7 +269,7 @@ Raven.context(async () => {
   // Expose webamp instance for debugging and integration tests.
   window.__webamp = webamp;
 
-  await bindToIndexDB(webamp);
+  await bindToIndexDB(webamp, clearState);
 
   await webamp.renderWhenReady(document.getElementById("app"));
 });
