@@ -27,6 +27,8 @@ import {
   SET_DUMMY_VIZ_DATA
 } from "./actionTypes";
 
+import { loadFilesFromReferences } from "./actionCreators";
+
 import {
   skinUrl as configSkinUrl,
   initialTracks,
@@ -268,6 +270,17 @@ Raven.context(async () => {
 
   // Expose webamp instance for debugging and integration tests.
   window.__webamp = webamp;
+
+  // Expose a file input in the DOM for testing.
+  const fileInput = document.createElement("input");
+  fileInput.id = "webamp-file-input";
+  fileInput.style.display = "none";
+  fileInput.type = "file";
+  fileInput.value = null;
+  fileInput.addEventListener("change", e => {
+    webamp.store.dispatch(loadFilesFromReferences(e.target.files));
+  });
+  document.body.appendChild(fileInput);
 
   await bindToIndexDB(webamp, clearState);
 
